@@ -1,13 +1,14 @@
+@use "./var/variables" as v;
+
 body {
-    font-family: $font-family;
-    color: $text-color;
-    background-color: $background-color;
-    margin: 0;
-    padding: 0;
-  }
-  
-  a {
-    text-decoration: none;
-    color: $primary-color;
-  }
-  
+  font-family: v.$font-family;
+  color: v.$text-color;
+  background-color: v.$background-color;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: v.$primary-color;
+}

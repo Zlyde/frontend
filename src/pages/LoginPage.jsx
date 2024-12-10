@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
-    /* const [email, setEmail] = useState('');
+  /* const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { error, setError } = useMessage();
     const { connectSocket } = useSocket();
@@ -38,12 +38,12 @@ const LoginPage = () => {
         }
     }; */
 
-    return (
-        <div>
-            <h1>Login</h1>
-                <p>Please log in to access the system.</p>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Login</h1>
+      <p>Please log in to access the system.</p>
+    </div>
+  );
 };
 
 export default LoginPage;

@@ -1,12 +1,13 @@
+@use "./var/variables" as v;
+
 .home {
-    .hero {
-      background-color: $secondary-color;
-      padding: $spacing-unit * 4;
-      text-align: center;
-  
-      h1 {
-        color: white;
-      }
+  .hero {
+    background-color: v.$secondary-color;
+    padding: v.$spacing-unit * 4;
+    text-align: center;
+
+    h1 {
+      color: white;
     }
   }
-  
+}
