@@ -20,10 +20,10 @@ p {
 }
 
 a {
-    color: v.$primary-color;
-    text-decoration: none;
-  
-    &:hover {
-      text-decoration: underline;
-    }
+  color: v.$primary-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
+}

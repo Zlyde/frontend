@@ -64,75 +64,74 @@
       }
     }
 
-//     .register-button {
-//       @include m.button(v.$primary-color, #fff);
-//       &:hover {
-//         background-color: m.darken(v.$primary-color, 10%);
-//       }
-//     }
-   }
+    //     .register-button {
+    //       @include m.button(v.$primary-color, #fff);
+    //       &:hover {
+    //         background-color: m.darken(v.$primary-color, 10%);
+    //       }
+    //     }
+  }
 }
 
 .login-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  
-    .login-form {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-  
-      .form-group {
-        margin-bottom: 15px;
-  
-        label {
-          display: block;
-          margin-bottom: 5px;
-          font-weight: bold;
-        }
-  
-        input {
-          width: 100%;
-          padding: 10px;
-          font-size: 1rem;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-        }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .login-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
       }
-  
-      .btn-primary {
-        background-color: v.$primary-color;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px;
+
+      input {
+        width: 100%;
+        padding: 10px;
         font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-  
-        &:hover {
-          background-color: darken(v.$primary-color, 10%);
-        }
+        border: 1px solid #ddd;
+        border-radius: 5px;
       }
     }
-  
-    .login-links {
-      text-align: center;
-      margin-top: 10px;
-  
-      a {
-        color: v.$primary-color;
-        text-decoration: none;
-        transition: color 0.3s;
-  
-        &:hover {
-          color: darken(v.$primary-color, 10%);
-        }
+
+    .btn-primary {
+      background-color: v.$primary-color;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken(v.$primary-color, 10%);
       }
     }
   }
-  
+
+  .login-links {
+    text-align: center;
+    margin-top: 10px;
+
+    a {
+      color: v.$primary-color;
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: darken(v.$primary-color, 10%);
+      }
+    }
+  }
+}

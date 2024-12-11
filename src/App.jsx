@@ -1,34 +1,81 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-// import { UserProvider } from './context/UserContext';
-// import MainLayout from './components/Layout/MainLayout';
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import { UserProvider } from "./context/UserContext";
+import PrivateRoute from "./components/PrivateRoute";
+import MainLayout from "./components/Layout/MainLayout";
+import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import Home from "./pages/Home";
-// import AdminRoutes from "./routes/AdminRoutes";
-// import CustomerRoutes from "./routes/CustomerRoutes";
-// import ServiceRoutes from "./routes/ServiceRoutes";
-import Header from "./components/Common/Header";
-import Footer from "./components/Common/Footer";
+import NotFoundPage from "./pages/NotFoundPage";
+import AdminLayout from "./components/Layout/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import CustomerLayout from "./components/Layout/CustomerLayout";
+import CustomerDashboard from "./pages/customer/CustomerDashboard";
+import ServiceLayout from "./components/Layout/ServiceLayout";
+import ServviceDashboard from "./pages/service/ServiceDashboard";
+import Users from "./pages/admin/Users";
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        <Route
+          path="/admin/*"
+          element={
+            <PrivateRoute
+              elemet={<AdminLayout />}
+              allwedRoles={["admin"]}
+              redirectTo="/login"
+            />
+          }
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+
+        <Route
+          path="/customer/*"
+          element={
+            <PrivateRoute
+              elemet={<CustomerLayout />}
+              allwedRoles={["customer"]}
+              redirectTo="/login"
+            />
+          }
+        >
+          <Route path="dashboard" element={<CustomerDashboard />} />
+        </Route>
+
+        <Route
+          path="/service/*"
+          element={
+            <PrivateRoute
+              elemet={<ServiceLayout />}
+              allwedRoles={["service"]}
+              redirectTo="/login"
+            />
+          }
+        >
+          <Route path="dashboard" element={<ServviceDashboard />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>,
+    ),
+  );
   return (
-      <Router>
-        <Header />
-        <Routes>
-            {/* Publika sidor */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/" element={<Home />} />
-            {/* <Link to="/register">Registrera dig här</Link> */}
-            {/* Skyddade routes */}
-            {/* <Route path="/admin/*" element={<AdminRoutes />} />
-            <Route path="/customer/*" element={<CustomerRoutes />} />
-            <Route path="/service/*" element={<ServiceRoutes />} /> */}
-        </Routes>
-        <Footer />
-      </Router>
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   );
 }
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const RegisterPage = () => {
   const handleRegister = (event) => {
     event.preventDefault();
-    console.log('Registrering skickad!');
+    console.log("Registrering skickad!");
   };
 
   return (
@@ -15,17 +15,34 @@ const RegisterPage = () => {
       <form className="register-form" onSubmit={handleRegister}>
         <div className="form-group">
           <label htmlFor="username">Användarnamn</label>
-          <input type="text" id="username" placeholder="Ditt användarnamn" required />
+          <input
+            type="text"
+            id="username"
+            placeholder="Ditt användarnamn"
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="email">E-post</label>
-          <input type="email" id="email" placeholder="Din e-postadress" required />
+          <input
+            type="email"
+            id="email"
+            placeholder="Din e-postadress"
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="password">Lösenord</label>
-          <input type="password" id="password" placeholder="Ditt lösenord" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Ditt lösenord"
+            required
+          />
         </div>
-        <button type="submit" className="register-button">Registrera</button>
+        <button type="submit" className="register-button">
+          Registrera
+        </button>
       </form>
     </div>
   );

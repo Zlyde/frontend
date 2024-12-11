@@ -54,14 +54,14 @@
 }
 
 .footer {
-    flex-shrink: 0;
-    background-color: v.$secondary-color;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-  
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
+  flex-shrink: 0;
+  background-color: v.$secondary-color;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
   }
+}
