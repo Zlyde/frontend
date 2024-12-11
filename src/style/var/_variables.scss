@@ -1,11 +1,15 @@
-// Färger
-$primary-color: #3498db;
-$secondary-color: #2ecc71;
-$text-color: #333;
-$background-color: #f8f9fa;
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Source+Sans+Pro');
 
+// Färger
+$primary-color: #1a73e8;
+$secondary-color: #fbbc05;
+$accent-color: #ffca28;
+$text-color: #333;
+$text-muted: #6c757d;
+$background-color: #f9f9f9;
+$border-color: #ced4da;
 // Typsnitt
-$font-family: "Roboto", sans-serif;
+$font-family: 'Merriweather', sans-serif;
 
 // Spacing
 $spacing-unit: 8px;

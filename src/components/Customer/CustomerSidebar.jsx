@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function CustomerSidebar() {
+const CustomerSidebar = () => {
   return (
-    <nav className="customer-sidebar">
+    <div className="sidebar">
+      <h3>Customer Menu</h3>
       <ul>
-        <li>Mina cyklar</li>
-        <li>Historik</li>
-        <li>Kontoinställningar</li>
+        <li><Link to="/customer/profile">Profile</Link></li>
+        <li><Link to="/customer/orders">My Orders</Link></li>
+        <li><Link to="/customer/settings">Settings</Link></li>
       </ul>
-    </nav>
+    </div>
   );
-}
+};
 
 export default CustomerSidebar;

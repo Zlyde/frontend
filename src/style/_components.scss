@@ -13,3 +13,55 @@
     background-color: color.adjust(v.$primary-color, $lightness: 10%);
   }
 }
+
+.app-header {
+  background-color: v.$primary-color;
+  color: #fff;
+  padding: 1rem 2rem;
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+
+      &:hover {
+        color: v.$accent-color;
+      }
+    }
+  }
+}
+
+.app-footer {
+  flex-shrink: 0;
+  background-color: v.$secondary-color;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.footer {
+    flex-shrink: 0;
+    background-color: v.$secondary-color;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+  }

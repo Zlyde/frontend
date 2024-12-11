@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-function AdminSidebar() {
+const AdminSidebar = () => {
   return (
-    <nav className="admin-sidebar">
+    <div className="sidebar">
+      <h3>Admin Menu</h3>
       <ul>
-        <li>Översikt</li>
-        <li>Cyklar</li>
-        <li>Laddstationer</li>
-        <li>Kunder</li>
+        <li><Link to="/admin/dashboard">Dashboard</Link></li>
+        <li><Link to="/admin/users">Manage Users</Link></li>
+        <li><Link to="/admin/settings">Settings</Link></li>
       </ul>
-    </nav>
+    </div>
   );
-}
+};
 
 export default AdminSidebar;

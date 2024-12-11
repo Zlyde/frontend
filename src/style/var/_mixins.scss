@@ -1,0 +1,44 @@
+@use 'sass:color';
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == small {
+    @media (max-width: 600px) {
+      @content;
+    }
+  } @else if $breakpoint == medium {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+}
+
+@mixin button($bg-color, $text-color) {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: $text-color;
+  background-color: $bg-color;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: lighten($bg-color, 10%);
+  }
+}
+
+@mixin darken($color, $amount) {
+  background-color: color.scale($color, $lightness: -$amount);
+}
+
+@mixin lighten($color, $amount) {
+  background-color: color.scale($color, $lightness: $amount);
+}

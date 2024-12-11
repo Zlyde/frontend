@@ -2,8 +2,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer">
-      <p>© 2024 Bike rental. All Rights Reserved.</p>
+    <footer className="app-footer">
+      <p>© 2024 Svenska Elsparkcyklar AB. All Rights Reserved.</p>
     </footer>
   );
 }
