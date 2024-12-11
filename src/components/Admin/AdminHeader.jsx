@@ -1,9 +1,11 @@
 import React from "react";
+import { useUserContext } from "../../context/UserContext";
 
 function AdminHeader() {
+  const { user } = useUserContext();
   return (
     <header className="admin-header">
-      <h1>Admin Panel</h1>
+      <h3>Hej {user.name}</h3>
     </header>
   );
 }

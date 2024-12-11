@@ -2,11 +2,11 @@
 import React, { createContext, useContext, useState } from "react";
 
 // Skapar en Context
-const UserContext = createContext();
+export const UserContext = createContext();
 
 // Användare Context Provider-komponent
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   const login = (userData) => {
     setUser(userData);
