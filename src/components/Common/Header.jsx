@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 
 const Header = () => {
   const { user, logout } = useUserContext();
+  const [dashText, setDashText] = useState("");
+  const [dashboardPath, setDashboardPath] = useState("");
 
   const handleLogout = () => {
     logout();
   };
+
+  useEffect(() => {
+    if (user) {
+      switch (user.role) {
+        case "admin":
+          setDashText("Admin Dashboard");
+          setDashboardPath("/admin/dashboard");
+          break;
+        case "customer":
+          setDashText("Account");
+          setDashboardPath("/customer/dashboard");
+          break;
+        case "service":
+          setDashText("Service Dashboard");
+          setDashboardPath("/service/dashboard");
+          break;
+        default:
+          setDashText("");
+          setDashboardPath("");
+      }
+    } else {
+      setDashText("");
+      setDashboardPath("");
+    }
+  }, [user]);
+
   return (
     <header className="app-header">
       <div className="header-container">
@@ -19,6 +47,7 @@ const Header = () => {
           <Link to="/">Hem</Link>
           {user ? (
             <>
+              <Link to={dashboardPath}>{dashText || "Dashboard"}</Link>
               <button onClick={handleLogout}>Logga ut</button>
             </>
           ) : (
