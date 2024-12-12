@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Startkommando, skriv ut "Hello World" till terminalen
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
