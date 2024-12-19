@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { userLogin } from "../api/UserAuth";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -8,60 +10,39 @@ const LoginPage = () => {
   const { login } = useUserContext();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    const mockuser = {
-      id: 1,
-      name: "John Doe",
-      role: "admin",
-    };
-
-    login(mockuser);
-
-    if (mockuser.role === "admin") {
-      navigate("/admin/dashboard");
-    } else if (mockuser.role === "customer") {
-      navigate("/customer/dashboard");
-    } else if (mockuser.role === "service") {
-      navigate("/service/dashboard");
-    } else {
-      navigate("/");
+    try {
+      const response = await userLogin(email, password)
+      if(!response.ok) {
+        const errorData = await response.json()
+        console.log('Failed to login', errorData)
+        toast.error(errorData.message)
+        return
+      }
+      const data = await response.json()
+      console.log(data.data)
+      const {user, token, message} = data.data
+      console.log('User Loged in', user.role, token)
+      login(user, token)
+      toast.success(message)
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (user.role === "customer") {
+        navigate("/customer/dashboard");
+      } else if (user.role === "service") {
+        navigate("/service/dashboard");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log('Failed to login', error)
+      toast.error('Failed to login, try again!')
+      return
     }
   };
-  // const { error, setError } = useMessage();
-  // const { connectSocket } = useSocket();
-  // const navigate = useNavigate();
 
-  // const handleSubmit = async (e) => {
-  //     e.preventDefault();
-
-  //     const url = 'https://jsramverk-editor-tesi23-beh7hvfadub6fugk.northeurope-01.azurewebsites.net/login';
-  //     const userData = { email, password };
-
-  //     try {
-  //         const requestOptions = {
-  //             method: 'POST',
-  //             headers: {
-  //                 'content-type': 'application/json',
-  //             },
-  //             body: JSON.stringify(userData),
-  //         };
-  //         const response = await fetch(url, requestOptions);
-  //         const data = await response.json();
-
-  //         if (response.ok) {
-  //             localStorage.setItem('token', data.data.token);
-  //             connectSocket(data.data.token);
-  //             navigate('/documents');
-  //         } else {
-  //             setError('Failed to login. Please try again');
-  //         }
-  //     } catch (error) {
-  //         setError('Failed to login. Please try again');
-  //         console.error(error);
-  //     }
-  // };
 
   return (
     <div className="login-page">
@@ -79,6 +60,8 @@ const LoginPage = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Ange din e-post"
               // required
             />
@@ -89,6 +72,8 @@ const LoginPage = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Ange ditt lösenord"
               // required
             />

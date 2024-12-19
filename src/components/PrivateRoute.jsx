@@ -3,9 +3,11 @@ import { Navigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 
 const PrivateRoute = ({ elemet, allwedRoles, redirectTo }) => {
-  const { user } = useUserContext();
+  const token = localStorage.getItem('token');
+  const userData = localStorage.getItem('user')
+  const user = JSON.parse(userData)
 
-  if (!user || !allwedRoles.includes(user.role)) {
+  if (!token || !allwedRoles.includes(user.role)) {
     return <Navigate to={redirectTo} />;
   }
 

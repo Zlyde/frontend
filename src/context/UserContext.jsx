@@ -6,18 +6,20 @@ export const UserContext = createContext();
 
 // Användare Context Provider-komponent
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
 
-  const login = (userData) => {
-    setUser(userData);
+  const login = (user, token) => {
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('token', token)
   };
 
   const logout = () => {
-    setUser(null);
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ login, logout }}>
       {children}
     </UserContext.Provider>
   );

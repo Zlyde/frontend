@@ -1,9 +1,32 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { userRegister } from "../api/UserAuth";
 
 const RegisterPage = () => {
-  const handleRegister = (event) => {
-    event.preventDefault();
-    console.log("Registrering skickad!");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await userRegister(name, email, password)
+      if(!response.ok) {
+        console.log('Failed to register')
+        toast.error('Kunde inte registrera, testa igen!')
+        return
+      }
+      console.log('User registered')
+      toast.success('Använda registrerad')
+      navigate('/login')
+    } catch (error) {
+      console.log(error)
+      toast.error('Kunde inte registrera, testa igen senare!')
+      return
+    }
+    
   };
 
   return (
@@ -14,11 +37,13 @@ const RegisterPage = () => {
       </header>
       <form className="register-form" onSubmit={handleRegister}>
         <div className="form-group">
-          <label htmlFor="username">Användarnamn</label>
+          <label htmlFor="name">Namn</label>
           <input
             type="text"
-            id="username"
-            placeholder="Ditt användarnamn"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Namn"
             required
           />
         </div>
@@ -27,6 +52,8 @@ const RegisterPage = () => {
           <input
             type="email"
             id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Din e-postadress"
             required
           />
@@ -36,6 +63,8 @@ const RegisterPage = () => {
           <input
             type="password"
             id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Ditt lösenord"
             required
           />
