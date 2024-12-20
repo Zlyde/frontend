@@ -1,9 +1,12 @@
 import React from "react";
 
 function CustomerHeader() {
+  const userData = localStorage.getItem('user')
+  const user = JSON.parse(userData)
+  
   return (
     <header className="customer-header">
-      <h3>Välkommen, Kund!</h3>
+      <h3>Välkommen, {user.name}!</h3>
     </header>
   );
 }

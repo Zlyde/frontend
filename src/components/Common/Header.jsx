@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 
 const Header = () => {
-  const { user, logout } = useUserContext();
+  const { logout } = useUserContext();
+  const userData = localStorage.getItem('user')
+  const user = JSON.parse(userData)
   const [dashText, setDashText] = useState("");
   const [dashboardPath, setDashboardPath] = useState("");
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     logout();
+    navigate('/login')
   };
 
   useEffect(() => {
