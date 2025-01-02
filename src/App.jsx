@@ -17,8 +17,15 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import CustomerLayout from "./components/Layout/CustomerLayout";
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
 import ServiceLayout from "./components/Layout/ServiceLayout";
-import ServviceDashboard from "./pages/service/ServiceDashboard";
+import ServiceDashboard from "./pages/service/ServiceDashboard";
 import Users from "./pages/admin/Users";
+import Pricing from "./pages/admin/Pricing";
+import Bikes from "./pages/admin/Bikes";
+import ParkingManagement from "./pages/admin/ParkingManagement";
+import CustomerManagement from "./pages/admin/CustomerManagement";
+import AccountDetails from "./pages/customer/AccountDetails";
+import PaymentHistory from "./pages/customer/PaymentHistory";
+import RentalHistory from "./pages/customer/RentalHistory";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,6 +47,10 @@ function App() {
         >
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<Users />} />
+          <Route path="settings" element={<Pricing />} />
+          <Route path="bikes" element={<Bikes />} />
+          <Route path="parkingzones" element={<ParkingManagement />} />
+          <Route path="customers" element={<CustomerManagement />} />
         </Route>
 
         <Route
@@ -53,6 +64,9 @@ function App() {
           }
         >
           <Route path="dashboard" element={<CustomerDashboard />} />
+          <Route path="account" element={<AccountDetails />} />
+          <Route path="payment" element={<PaymentHistory />} />
+          <Route path="rental" element={<RentalHistory />} />
         </Route>
 
         <Route
@@ -65,7 +79,7 @@ function App() {
             />
           }
         >
-          <Route path="dashboard" element={<ServviceDashboard />} />
+          <Route path="dashboard" element={<ServiceDashboard />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

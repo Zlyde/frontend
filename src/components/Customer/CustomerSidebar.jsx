@@ -7,13 +7,13 @@ const CustomerSidebar = () => {
       <h3>Customer Menu</h3>
       <ul>
         <li>
-          <Link to="/customer/profile">Profile</Link>
+          <Link to="/customer/account">Account Details</Link>
         </li>
         <li>
-          <Link to="/customer/orders">My Orders</Link>
+          <Link to="/customer/rental">Rental History</Link>
         </li>
         <li>
-          <Link to="/customer/settings">Settings</Link>
+          <Link to="/customer/payment">Payment History</Link>
         </li>
       </ul>
     </div>
