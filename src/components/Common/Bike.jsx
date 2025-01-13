@@ -4,7 +4,7 @@ import L from 'leaflet'
 import scooterImg from '../../assets/scooter.png'
 
 const Bike = ({ bike }) => {
-  if (!bike || !bike.location || !bike.location.coordinates || bike.status !== "available") {
+  if (!bike || !bike.location || !bike.location.coordinates) {
     return null
   }
 
