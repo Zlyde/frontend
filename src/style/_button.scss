@@ -1,0 +1,56 @@
+@use "./var/variables" as v;
+@use "sass:color";
+
+.button {
+    background-color: v.$primary-color;
+    color: white;
+    // padding: v.$spacing-unit v.$spacing-unit * 2;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: color.adjust(v.$primary-color, $lightness: 10%);
+    }
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(111, 142, 131);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .primary-btn {
+    background-color: rgb(111, 142, 131);
+    color: #fff;
+  }
+  
+  .primary-btn:hover {
+    background-color: rgb(91, 122, 111);
+  }
+  
+  .secondary-btn {
+    margin-top: 10px;
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .secondary-btn:hover {
+    background-color: #5a6268;
+  }

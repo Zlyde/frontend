@@ -10,3 +10,20 @@ export const fetchBikes = async () => {
     return
   }
 }
+
+// Funktion för att hämta statistik baserat på cykeldatan
+export const fetchBikeStats = async () => {
+  try {
+    const bikes = await fetchBikes();
+
+    // Beräkna statistiken
+    const totalBikes = bikes.length;
+    const activeRentals = bikes.filter((bike) => bike.status === "in-use").length;
+    const chargingStations = bikes.filter((bike) => bike.status === "charging").length;
+
+    return { totalBikes, activeRentals, chargingStations };
+  } catch (error) {
+    console.log("Fel vid hämtning av statistik: ", error.message);
+    throw error; // Skicka vidare felet
+  }
+};

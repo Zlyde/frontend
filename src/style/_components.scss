@@ -1,19 +1,6 @@
 @use "./var/variables" as v;
 @use "sass:color";
 
-.button {
-  background-color: v.$primary-color;
-  color: white;
-  padding: v.$spacing-unit v.$spacing-unit * 2;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: color.adjust(v.$primary-color, $lightness: 10%);
-  }
-}
-
 .app-header {
   background-color: v.$primary-color;
   color: #fff;

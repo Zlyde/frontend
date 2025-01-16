@@ -52,7 +52,7 @@ const Header = () => {
           {user ? (
             <>
               <Link to={dashboardPath}>{dashText || "Dashboard"}</Link>
-              <button className="cta-button" onClick={handleLogout}>Logga ut</button>
+              <button className="btn primary-btn" onClick={handleLogout}>Logga ut</button>
             </>
           ) : (
             <>

@@ -63,13 +63,6 @@
         }
       }
     }
-
-    //     .register-button {
-    //       @include m.button(v.$primary-color, #fff);
-    //       &:hover {
-    //         background-color: m.darken(v.$primary-color, 10%);
-    //       }
-    //     }
   }
 }
 
@@ -134,4 +127,63 @@
       }
     }
   }
+}
+
+.admin-pricing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+main {
+  padding: 20px;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.pricing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  font-size: 16px;
+  color: #555;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
 }
