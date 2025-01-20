@@ -12,9 +12,9 @@ const CustomerDashboard = () => {
           <h1>Välkommen tillbaka, {user.name}</h1>
           <div className="quick-actions">
             <h2>Snabbåtgärder</h2>
-            <Link to="/customer/account-details">Kontodetaljer</Link><br></br>
-            <Link to="/customer/rental-history">Uthyrningshistorik</Link><br></br>
-            <Link to="/customer/payment-history">Betalningshistorik</Link>
+            <Link to="/customer/account">Kontodetaljer</Link><br></br>
+            <Link to="/customer/rental">Uthyrningshistorik</Link><br></br>
+            <Link to="/customer/payment">Betalningshistorik</Link>
           </div>
         </main>
       </div>

@@ -12,6 +12,18 @@ export const fetchUsers = async () => {
   }
 };
 
+// Hämta en specifik användare
+export const fetchUser = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/${userId}`);
+    if (!response.ok) throw new Error('Kunde inte hämta användare');
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 // Ta bort en användare
 export const deleteUser = async (userId) => {
   try {

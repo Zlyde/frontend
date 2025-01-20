@@ -27,7 +27,7 @@ export const fetchZones = async () => {
 // Hämta cyklar för en specifik laddstation
 export const fetchBikesAtStation = async (stationId) => {
   try {
-    const response = await fetch(`${API_URL}/station/${stationId}/bike`);
+    const response = await fetch(`${API_URL}/station/${stationId}/bikes`);
     if (!response.ok) throw new Error('Kunde inte hämta cyklar för laddstationen');
     return await response.json();
   } catch (error) {
@@ -39,7 +39,7 @@ export const fetchBikesAtStation = async (stationId) => {
 // Hämta cyklar för en specifik parkeringszon
 export const fetchBikesAtZone = async (zoneId) => {
   try {
-    const response = await fetch(`${API_URL}/zone/${zoneId}/bike`);
+    const response = await fetch(`${API_URL}/zone/${zoneId}/bikes`);
     if (!response.ok) throw new Error('Kunde inte hämta cyklar för parkeringszonen');
     return await response.json();
   } catch (error) {

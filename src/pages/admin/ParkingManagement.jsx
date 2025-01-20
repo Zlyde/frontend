@@ -3,7 +3,7 @@ import Map from '../../components/Common/Map';
 import { fetchStations, fetchZones } from "../../utils/StationZoneCall";
 
 const ParkingManagement = () => {
-  const [center] = useState({ lat: 59.329323, lng: 18.068581 });
+  const [center] = useState({ lat: 59.329323, lng: 18.068581 }); // Stockholm som standard
   const [parkingZones, setParkingZones] = useState([]);
   const [chargingStations, setChargingStations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -17,9 +17,44 @@ const ParkingManagement = () => {
         fetchZones(),
         fetchStations()
       ]);
-      
-      setParkingZones(zones);
-      setChargingStations(stations);
+
+      console.log("Hämtade zoner:", zones); // Logga zoner
+      console.log("Hämtade stationer:", stations); // Logga stationer
+  
+      // Filtrera och transformera zoner
+      const validZones = zones
+        .filter(zone => zone.location && zone.location.latitude && zone.location.longitude)
+        .map(zone => ({
+          id: zone._id, // Identifiera zon
+          name: `Zon ${zone.parking_zone_id}`, // Sätt ett namn för presentation
+          latitude: zone.location.latitude,
+          longitude: zone.location.longitude,
+          bikeCount: zone.bikeCount || 0, // Om bikeCount finns
+        }));
+  
+      // Filtrera och transformera stationer
+      const validStations = stations
+        .filter(station => station.location && station.location.latitude && station.location.longitude)
+        .map(station => ({
+          id: station._id, // Identifiera station
+          name: `Station ${station.charging_station_id}`, // Sätt ett namn för presentation
+          latitude: station.location.latitude,
+          longitude: station.location.longitude,
+          availableSlots: station.availableSlots || 0, // Om availableSlots finns
+        }));
+  
+      // Logga ogiltiga objekt för felsökning
+      console.warn(
+        "Ogiltiga parkeringszoner:",
+        zones.filter(zone => !(zone.location && zone.location.latitude && zone.location.longitude))
+      );
+      console.warn(
+        "Ogiltiga laddstationer:",
+        stations.filter(station => !(station.location && station.location.latitude && station.location.longitude))
+      );
+  
+      setParkingZones(validZones);
+      setChargingStations(validStations);
     } catch (err) {
       setError('Kunde inte hämta platser');
       console.error('Error fetching locations:', err);
@@ -27,7 +62,7 @@ const ParkingManagement = () => {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     loadLocations();
   }, []);
@@ -52,7 +87,7 @@ const ParkingManagement = () => {
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Hantera parkeringszoner och laddstationer</h1>
-      
+
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           {error}
@@ -79,7 +114,7 @@ const ParkingManagement = () => {
               <div className="space-y-4">
                 {parkingZones.map(zone => (
                   <div 
-                    key={zone.id} 
+                    key={zone.id} // Kontrollera att detta är unikt
                     className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer"
                     onClick={() => handleLocationClick(zone, 'zone')}
                   >
@@ -111,7 +146,7 @@ const ParkingManagement = () => {
               <div className="space-y-4">
                 {chargingStations.map(station => (
                   <div 
-                    key={station.id} 
+                    key={station.id} // Kontrollera att detta är unikt
                     className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer"
                     onClick={() => handleLocationClick(station, 'station')}
                   >
