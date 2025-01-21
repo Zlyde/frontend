@@ -16,12 +16,13 @@ const MapPage = () => {
   const [center, setCenter] = useState({ lat: 59.329323, lng: 18.068581 });
   const [cities, setCities] = useState([]);
   const [bikes, setBikes] = useState([]);
+  const [trips, setTrips] = useState([]);
   const [stations, setStations] = useState([]);
   const [zones, setZones] = useState([]);
   const [selectedStation, setSelectedStation] = useState(null);
   const [selectedZone, setSelectedZone] = useState(null);
-  const numTrips = 16;
-  const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
+  // const numTrips = 16;
+  // const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
 
   const getCities = async () => {
     const data = await fetchCities();
@@ -71,12 +72,17 @@ const MapPage = () => {
     getBikes();
     getStationsAndZones();
 
-    roomIds.forEach((roomId) => {
-      socket.emit("join-trip-room", roomId);
-    });
+    // roomIds.forEach((roomId) => {
+    //   socket.emit("join-trip-room", roomId);
+    // });
 
-    socket.on("position-updated", (data) => {
-      const bike = data;
+    socket.on("admin-trip-update", (trip) => {
+      const { bike } = trip
+
+      setTrips((prevTrips) => {
+        const updatedTrips = prevTrips.filter((t) => t.trip_id !== trip.trip_id);
+        return [...updatedTrips, trip];
+      });
 
       setBikes((prevBikes) => {
         const updatedBikes = prevBikes.filter((b) => b.bike_id !== bike.bike_id);
@@ -85,7 +91,7 @@ const MapPage = () => {
     });
 
     return () => {
-      socket.off("position-updated");
+      socket.off("admin-trip-update");
       socket.off("disconnect");
     };
   }, []);
@@ -141,6 +147,7 @@ const MapPage = () => {
               <th>Status</th>
               <th>Position</th>
               <th>Typ</th>
+              <th>Meddelande</th>
             </tr>
           </thead>
           <tbody>
@@ -149,11 +156,12 @@ const MapPage = () => {
                 <td>{bike.bike_id}</td>
                 <td>{bike.status}</td>
                 <td>
-                  {bike.latitude && bike.longitude
-                    ? `${bike.latitude.toFixed(4)}, ${bike.longitude.toFixed(4)}`
+                  {bike.location || bike.location.coordinates
+                    ? `${bike.location.coordinates[1].toFixed(4)}, ${bike.location.coordinates[0].toFixed(4)}`
                     : "Okänd position"}
                 </td>
                 <td>{bike.type || "Okänd"}</td>
+                <td>{bike.message}</td>
               </tr>
             ))}
           </tbody>
