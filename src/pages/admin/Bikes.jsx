@@ -10,8 +10,8 @@ const MapPage = () => {
   const [center, setCenter] = useState({ lat: 59.329323, lng: 18.068581 });
   const [cities, setCities] = useState([])
   const [bikes, setBikes] = useState([])
-  const numTrips = 16;
-  const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
+  // const numTrips = 16;
+  // const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
 
   const getCities = async () => {
     const data = await fetchCities()
@@ -29,15 +29,10 @@ const MapPage = () => {
     getCities()
     getBikes()
 
-    roomIds.forEach((roomId) => {
-      socket.emit("join-trip-room", roomId);
-    });
 
-    // const tripiD = 'trip1'
-    // socket.emit('join-trip-room', (tripiD))
-
-    socket.on('position-updated', (data) => {
-      const bike = data
+    socket.on('admin-trip-update', (trip) => {
+      const { bike } = trip
+      console.log(trip)
 
       setBikes((prevBikes) => {
         const updateBikes = prevBikes.filter((b) => b.bike_id !== bike.bike_id)
@@ -46,7 +41,7 @@ const MapPage = () => {
     })
 
     return () => {
-      socket.off('position-updated');
+      socket.off('admin-trip-update');
       socket.off('disconnect')
     }
   }, [])

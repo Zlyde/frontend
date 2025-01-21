@@ -35,10 +35,10 @@ const Bike = ({ bike }) => {
         <div>
           <h3>Bike Info</h3>
           <p><strong>ID:</strong> {bike.bike_id}</p>
+          <p><strong>Stuts:</strong> {bike.status}</p>
           <p><strong>Battery:</strong> {bike.battery_level}</p>
-          <button style={startRideButton}>
-            Start Ride
-          </button>
+          <p><strong>Speed:</strong> {bike.speed}</p>
+          <p><strong>Message:</strong> {bike.message}</p>
         </div>
       </Popup>
     </Marker>
