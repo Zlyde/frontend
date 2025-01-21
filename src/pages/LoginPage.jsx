@@ -95,6 +95,10 @@ const LoginPage = () => {
     }
   };
 
+  const handleGitHubLogin = () => {
+    window.location.href = 'http://localhost:5001/api/auth/github'
+  }
+
   return (
     <div className="login-page">
       <header className="header">
@@ -132,6 +136,10 @@ const LoginPage = () => {
             Logga in
           </button>
         </form>
+
+        <button onClick={handleGitHubLogin}>
+          Login with GitHub
+        </button>
 
         <div className="login-links">
           <p>

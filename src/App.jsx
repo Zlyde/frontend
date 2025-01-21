@@ -26,6 +26,7 @@ import CustomerManagement from "./pages/admin/CustomerManagement";
 import AccountDetails from "./pages/customer/AccountDetails";
 import PaymentHistory from "./pages/customer/PaymentHistory";
 import RentalHistory from "./pages/customer/RentalHistory";
+import GitCallback from "./pages/GitCallback";
 
 function App() {
   const router = createBrowserRouter(
@@ -34,6 +35,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path='/oauth/callback' element={<GitCallback />}/>
 
         <Route
           path="/admin/*"
