@@ -21,11 +21,10 @@ const MapPage = () => {
   const [zones, setZones] = useState([]);
   const [selectedStation, setSelectedStation] = useState(null);
   const [selectedZone, setSelectedZone] = useState(null);
-  // const numTrips = 16;
-  // const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
 
   const getCities = async () => {
     const data = await fetchCities();
+    // console.log(data)
     setCities(data);
   };
 
@@ -40,6 +39,8 @@ const MapPage = () => {
         fetchStations(),
         fetchZones(),
       ]);
+      // console.log("Fetched zones:", zoneData);
+      // console.log("Fetched sations:", stationData);
       setStations(stationData);
       setZones(zoneData);
     } catch (error) {
@@ -72,10 +73,6 @@ const MapPage = () => {
     getBikes();
     getStationsAndZones();
 
-    // roomIds.forEach((roomId) => {
-    //   socket.emit("join-trip-room", roomId);
-    // });
-
     socket.on("admin-trip-update", (trip) => {
       const { bike } = trip
 
@@ -89,7 +86,7 @@ const MapPage = () => {
         return [...updatedBikes, bike];
       });
     });
-
+    
     return () => {
       socket.off("admin-trip-update");
       socket.off("disconnect");
@@ -99,7 +96,13 @@ const MapPage = () => {
   return (
     <div className="bikes-page">
       {/* Karta */}
-      <Map center={center} cities={cities} bikes={bikes} />
+      <Map 
+        center={center} 
+        cities={cities}
+        zones={zones}
+        stations={stations}  
+        bikes={bikes}
+      />
 
       {/* Filter */}
       <div className="filters">
@@ -113,8 +116,8 @@ const MapPage = () => {
           >
             <option value="">Alla laddstationer</option>
             {stations.map((station) => (
-              <option key={station.id} value={station.id}>
-                {station.name}
+              <option key={station._id} value={station._id}>
+                {station._id}
               </option>
             ))}
           </select>
@@ -129,8 +132,8 @@ const MapPage = () => {
           >
             <option value="">Alla parkeringszoner</option>
             {zones.map((zone) => (
-              <option key={zone.id} value={zone.id}>
-                {zone.name}
+              <option key={zone._id} value={zone.parking_zone_id}>
+                {zone.parking_zone_id}
               </option>
             ))}
           </select>

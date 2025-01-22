@@ -31,6 +31,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import City from "./City";
 import Bike from './Bike';
+import Zone from './Zone';
+import Station from './Station';
 
 const Map = ({ 
   center, 
@@ -41,6 +43,7 @@ const Map = ({
   onZoneClick,
   onStationClick 
 }) => {
+  // console.log(stations)
   return (
     <MapContainer className="map" center={center} zoom={13}>
       <TileLayer
@@ -49,14 +52,22 @@ const Map = ({
       />
       
       {cities.length > 0 && cities.map((city) => (
-        <City key={city._id} boundary={city.boundary} color={city.color} />
+        <City key={city._id} city={city} />
+      ))}
+
+      {zones.length > 0 && zones.map((zone) => (
+        <Zone key={zone._id} zone={zone} />
+      ))}
+
+      {stations.length > 0 && stations.map((station) => (
+        <Station key={station._id} station={station} />
       ))}
       
       {bikes.length > 0 && bikes.map((bike) => (
         <Bike key={bike._id} bike={bike} />
       ))}
 
-      {zones.map((zone) => (
+      {/* {zones.map((zone) => (
         <Marker
           key={zone.id}
           position={[zone.latitude, zone.longitude]}
@@ -90,7 +101,7 @@ const Map = ({
             </div>
           </Popup>
         </Marker>
-      ))}
+      ))} */}
     </MapContainer>
   );
 };

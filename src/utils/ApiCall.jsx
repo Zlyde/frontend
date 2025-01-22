@@ -4,7 +4,7 @@ export const fetchCities = async () => {
     if (!response.ok) {
       throw new Error('could not fetch cities')
     }
-    console.log(response)
+    // console.log(response)
     return await response.json()
   } catch (error) {
     console.log('Error fetching cities', error)

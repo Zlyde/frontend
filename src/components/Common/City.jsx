@@ -1,14 +1,15 @@
 import React from 'react'
 import { GeoJSON } from 'react-leaflet'
 
-const City = ({ boundary, color }) => {
+const City = ({ city }) => {
+  if(!city) return
   return (
     <GeoJSON
-      data={boundary}
+      data={city.boundary}
       style={{
-        color: color,
+        color: city.color,
         weight: 2,
-        fillColor: color,
+        fillColor: city.color,
         fillOpacity: 0.5
       }} 
     />
