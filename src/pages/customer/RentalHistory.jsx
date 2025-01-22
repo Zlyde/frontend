@@ -11,12 +11,7 @@ const RentalHistory = () => {
     // Hämta användarens ID från localStorage
     const userId = localStorage.getItem('userId'); // Ersätt med rätt metod om du lagrar användar-ID på annat sätt
 
-    if (userId) {
-      fetchRentalHistory(userId); // Hämta uthyrningshistorik för den inloggade användaren
-    } else {
-      console.error('Inget användar-ID hittades. Kontrollera att användaren är inloggad.');
-      window.location.href = '/login'; // Om användaren inte är inloggad, omdirigera till login
-    }
+    loadRentalHistory(userId);
   }, []);
 
   // Funktion för att hämta uthyrningshistorik från backend
