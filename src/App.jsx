@@ -35,7 +35,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path='/oauth/callback' element={<GitCallback />}/>
+        <Route path='/oauth/callbackk' element={<GitCallback />}/>
 
         <Route
           path="/admin/*"
