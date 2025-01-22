@@ -4,9 +4,7 @@ import L from 'leaflet'
 import scooterImg from '../../assets/scooter.png'
 
 const Bike = ({ bike }) => {
-  if (!bike || !bike.location || !bike.location.coordinates) {
-    return null
-  }
+  if (!bike || !bike.location || !bike.location.coordinates) return
 
   const bikeIcon = new L.icon({
     iconUrl: scooterImg,
@@ -36,9 +34,10 @@ const Bike = ({ bike }) => {
           <h3>Bike Info</h3>
           <p><strong>ID:</strong> {bike.bike_id}</p>
           <p><strong>Battery:</strong> {bike.battery_level}</p>
-          <button style={startRideButton}>
+          <p><strong>Message:</strong> {bike.message}</p>
+          {/* <button style={startRideButton}>
             Start Ride
-          </button>
+          </button> */}
         </div>
       </Popup>
     </Marker>
