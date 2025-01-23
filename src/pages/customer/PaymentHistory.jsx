@@ -27,7 +27,7 @@ const PaymentHistory = ({ userId }) => {
   // Hantera betalning
   const handlePayment = async (invoiceId) => {
     try {
-      const paymentMethod = 'prepaid'; // Eller dynamiskt beroende på användarens val
+      const paymentMethod = 'prepaid';
       const updatedInvoice = await markInvoiceAsPaid(invoiceId, paymentMethod);
 
       // Uppdatera fakturorna i state
@@ -64,7 +64,7 @@ const PaymentHistory = ({ userId }) => {
               <td>{invoice.status}</td>
               <td>
                 {invoice.status === 'unpaid' ? (
-                  <button onClick={() => handlePayment(invoice.invoice_id)}>
+                  <button onClick={() => handlePayment(invoice.invoice_id)} className="btn primary-btn">
                     Betala
                   </button>
                 ) : (

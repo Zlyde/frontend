@@ -9,7 +9,7 @@ const RentalHistory = () => {
 
   useEffect(() => {
     // Hämta användarens ID från localStorage
-    const userId = localStorage.getItem('userId'); // Ersätt med rätt metod om du lagrar användar-ID på annat sätt
+    const userId = localStorage.getItem('userId');
 
     loadRentalHistory(userId);
   }, []);
@@ -68,7 +68,7 @@ const RentalHistory = () => {
                   <td>{rental.end_time ? new Date(rental.end_time).toLocaleTimeString() : 'Pågående'}</td>
                   <td>{rental.total_cost} SEK</td>
                   <td>
-                    <button onClick={() => handleRentalClick(rental)}>Visa detaljer</button>
+                    <button onClick={() => handleRentalClick(rental)} className="btn primary-btn">Visa detaljer</button>
                   </td>
                 </tr>
               ))}

@@ -42,7 +42,7 @@ export const deleteUser = async (userId) => {
 export const updateUser = async (userId, updatedData) => {
   try {
     const response = await fetch(`${API_URL}/${userId}`, {
-      method: 'PUT', // PUT till /api/user/{user_id}
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData),
     });

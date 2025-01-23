@@ -22,7 +22,6 @@ import Users from "./pages/admin/Users";
 import Pricing from "./pages/admin/Pricing";
 import Bikes from "./pages/admin/Bikes";
 import ParkingManagement from "./pages/admin/ParkingManagement";
-import CustomerManagement from "./pages/admin/CustomerManagement";
 import AccountDetails from "./pages/customer/AccountDetails";
 import PaymentHistory from "./pages/customer/PaymentHistory";
 import RentalHistory from "./pages/customer/RentalHistory";
@@ -52,7 +51,6 @@ function App() {
           <Route path="settings" element={<Pricing />} />
           <Route path="bikes" element={<Bikes />} />
           <Route path="parkingzones" element={<ParkingManagement />} />
-          <Route path="customers" element={<CustomerManagement />} />
         </Route>
 
         <Route

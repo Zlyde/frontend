@@ -10,19 +10,16 @@ const AdminSidebar = () => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link to="/admin/users">Manage Users</Link>
+          <Link to="/admin/users">Hantera användare</Link>
         </li>
         <li>
-          <Link to="/admin/settings">Settings</Link>
+          <Link to="/admin/settings">Prissättning</Link>
         </li>
         <li>
-          <Link to="/admin/bikes">Manage and view bikes</Link>
+          <Link to="/admin/bikes">Hantera och visa elsparkcyklar</Link>
         </li>
         <li>
-          <Link to="/admin/parkingzones">Manage Parking Zones</Link>
-        </li>
-        <li>
-          <Link to="/admin/customers">Manage Customers</Link>
+          <Link to="/admin/parkingzones">Hantera parkeringszoner och laddstationer</Link>
         </li>
       </ul>
     </div>

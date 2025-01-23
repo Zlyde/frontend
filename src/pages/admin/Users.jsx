@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsers, deleteUser, updateUser } from "../../utils/UserCall";
+import { fetchUsers, fetchUser, deleteUser, updateUser } from "../../utils/UserCall";
 import { FaTrash, FaEdit, FaCheck, FaTimes, FaSearch } from "react-icons/fa";
 
 const Users = () => {
@@ -27,27 +27,32 @@ const Users = () => {
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (user_id) => {
     if (window.confirm("Är du säker på att du vill ta bort användaren?")) {
       try {
-        await deleteUser(id);
-        setUsers(users.filter((user) => user.id !== id));
+        await deleteUser(user_id);
+        setUsers(users.filter((user) => user.user_id !== user_id));
       } catch (err) {
         setError("Kunde inte ta bort användaren.");
       }
     }
   };
 
-  const handleEdit = (user) => {
-    setEditMode(user.id);
-    setEditData({ name: user.name, email: user.email, role: user.role });
+  const handleEdit = async (user_id) => {
+    try {
+      const user = await fetchUser(user_id);
+      setEditMode(user.user_id);
+      setEditData({ name: user.name, email: user.email, role: user.role });
+    } catch (err) {
+      setError("Kunde inte hämta användardata.");
+    }
   };
 
   const handleSave = async () => {
     try {
       const updatedUser = await updateUser(editMode, editData);
       setUsers(
-        users.map((user) => (user.id === editMode ? updatedUser : user))
+        users.map((user) => (user.user_id === editMode ? updatedUser : user))
       );
       setEditMode(null);
     } catch (err) {
@@ -87,10 +92,10 @@ const Users = () => {
             </thead>
             <tbody>
               {filteredUsers.map((user) => (
-                <tr key={user.id} className={editMode === user.id ? "editing" : ""}>
-                  {editMode === user.id ? (
+                <tr key={user.user_id} className={editMode === user.user_id ? "editing" : ""}>
+                  {editMode === user.user_id ? (
                     <>
-                      <td>{user.id}</td>
+                      <td>{user.user_id}</td>
                       <td>
                         <input
                           type="text"
@@ -125,7 +130,7 @@ const Users = () => {
                     </>
                   ) : (
                     <>
-                      <td>{user.id}</td>
+                      <td>{user.user_id}</td>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>{user.role}</td>
@@ -137,7 +142,7 @@ const Users = () => {
                         />
                         <FaTrash
                           className="action-icon delete"
-                          onClick={() => handleDelete(user.id)}
+                          onClick={() => handleDelete(user.user_id)}
                           title="Ta bort"
                         />
                       </td>

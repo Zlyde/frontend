@@ -47,7 +47,7 @@ const Station = ({ station }) => {
         <Popup>
           <div>
             <h3 className="font-bold">{station.charging_station_id}</h3>
-            <p>Parkeringszon</p>
+            <p>Laddstation</p>
             {/* <p>Antal cyklar: {zone.bikeCount || 0}</p> */}
           </div>
         </Popup>
