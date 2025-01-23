@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUser, updateUser } from '../../utils/UserCall';
+import { toast } from "react-toastify";
 
 const AccountDetails = () => {
   const userData = localStorage.getItem('user')
@@ -62,10 +63,12 @@ const AccountDetails = () => {
     try {
       const updatedUser = await updateUser(userIdFromStorage, user); // Skicka uppdaterad data till backend
       console.log('Uppdaterad användardata:', updatedUser);
-      alert('Kontodetaljer uppdaterades!');
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      toast.success('Kontodetaljer uppdaterades!');
     } catch (error) {
       console.error('Kunde inte uppdatera användardetaljer:', error);
-      alert('Något gick fel vid uppdateringen.');
+      toast.error('Något gick fel vid uppdateringen.');
     }
   };
 
