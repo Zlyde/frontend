@@ -4,50 +4,6 @@ import { useUserContext } from "../context/UserContext";
 import { userLogin } from "../api/UserAuth";
 import { toast } from "react-toastify";
 
-
-
-
-
-
-
-
-
-
-
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await userLogin(email, password)
-//       if(!response.ok) {
-//         const errorData = await response.json()
-//         console.log('Failed to login', errorData)
-//         toast.error(errorData.message)
-//         return
-//       }
-//       const data = await response.json()
-//       console.log(data.data)
-//       const {user, token, message} = data.data
-//       console.log('User Loged in', user.role, token)
-//       login(user, token)
-//       toast.success(message)
-//       if (user.role === "admin") {
-//         navigate("/admin/dashboard");
-//       } else if (user.role === "customer") {
-//         navigate("/customer/dashboard");
-//       } else if (user.role === "service") {
-//         navigate("/service/dashboard");
-//       } else {
-//         navigate("/");
-//       }
-//     } catch (error) {
-//       console.log('Failed to login', error)
-//       toast.error('Failed to login, try again!')
-//       return
-//     }
-//   };
-
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -137,16 +93,13 @@ const LoginPage = () => {
           </button>
         </form>
 
-        <button onClick={handleGitHubLogin}>
-          Login with GitHub
+        <button className="btn-primary" onClick={handleGitHubLogin}>
+          Logga in med GitHub
         </button>
 
         <div className="login-links">
           <p>
             Har du inget konto? <Link to="/register">Registrera dig här</Link>
-          </p>
-          <p>
-            <Link to="/forgot-password">Glömt lösenordet?</Link>
           </p>
         </div>
       </main>

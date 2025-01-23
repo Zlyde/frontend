@@ -42,9 +42,14 @@ const Users = () => {
     try {
       const user = await fetchUser(user_id);
       setEditMode(user.user_id);
-      setEditData({ name: user.name, email: user.email, role: user.role });
+      setEditData({ 
+        name: user.name,
+        email: user.email,
+        role: user.role 
+      });
     } catch (err) {
       setError("Kunde inte hämta användardata.");
+      console.error("Fetch user error:", err);
     }
   };
 
@@ -57,6 +62,7 @@ const Users = () => {
       setEditMode(null);
     } catch (err) {
       setError("Kunde inte uppdatera användaren.");
+      console.error("Update user error:", err);
     }
   };
 
@@ -137,7 +143,7 @@ const Users = () => {
                       <td>
                         <FaEdit
                           className="action-icon"
-                          onClick={() => handleEdit(user)}
+                          onClick={() => handleEdit(user.user_id)}
                           title="Redigera"
                         />
                         <FaTrash
