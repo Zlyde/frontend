@@ -9,7 +9,10 @@ const PaymentHistory = ({ userId }) => {
 
   // Hämta fakturor när komponenten laddas
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
+    const userData = localStorage.getItem('user')
+    const user = JSON.parse(userData)
+    const userId = user.user_id
     const loadInvoices = async () => {
       setLoading(true);
       try {
