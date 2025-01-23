@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <header className="app-header">
       <div className="header-container">
-        <h1>Svenska Elsparkcyklar AB</h1>
+        <h1>ZOOMIES</h1>
         <nav>
           {/* <a href="/">Hem</a>
           <a href="/register">Registrera</a>

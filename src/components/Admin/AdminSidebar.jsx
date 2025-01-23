@@ -16,10 +16,7 @@ const AdminSidebar = () => {
           <Link to="/admin/settings">Prissättning</Link>
         </li>
         <li>
-          <Link to="/admin/bikes">Hantera och visa elsparkcyklar</Link>
-        </li>
-        <li>
-          <Link to="/admin/parkingzones">Hantera parkeringszoner och laddstationer</Link>
+          <Link to="/admin/bikes">Hantera cyklar, stationer och zoner</Link>
         </li>
       </ul>
     </div>

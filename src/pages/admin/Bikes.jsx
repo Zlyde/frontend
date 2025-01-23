@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react";
-import Map from "../../components/Common/Map";
-import { fetchCities } from "../../utils/ApiCall";
-import { fetchBikes } from "../../utils/BikeCall";
-import {
-  fetchStations,
-  fetchZones,
-  fetchBikesAtStation,
-  fetchBikesAtZone,
-} from "../../utils/StationZoneCall";
-import io from "socket.io-client";
+import React, { useState, useEffect } from 'react';
+import { fetchBikes, updateBike } from '../../utils/BikeCall';
+import { fetchStations, fetchZones, fetchBikesAtStation, fetchBikesAtZone } from '../../utils/StationZoneCall';
+import { fetchCities } from '../../utils/ApiCall';
+import Map from '../../components/Common/Map';
+import io from 'socket.io-client';
 
 const socket = io("http://localhost:5001");
 
-const MapPage = () => {
-  const [center, setCenter] = useState({ lat: 59.329323, lng: 18.068581 });
-  const [cities, setCities] = useState([]);
+const Bikes = () => {
+  const [center] = useState({ lat: 59.329323, lng: 18.068581 });
   const [bikes, setBikes] = useState([]);
-  const [trips, setTrips] = useState([]);
   const [stations, setStations] = useState([]);
   const [zones, setZones] = useState([]);
-  const [selectedStation, setSelectedStation] = useState(null);
-  const [selectedZone, setSelectedZone] = useState(null);
+  const [cities, setCities] = useState([]);
+  const [selectedStation, setSelectedStation] = useState('');
+  const [selectedZone, setSelectedZone] = useState('');
 
-  const getCities = async () => {
-    const data = await fetchCities();
-    // console.log(data)
-    setCities(data);
-  };
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [fetchedBikes, fetchedStations, fetchedZones, fetchedCities] = await Promise.all([
+          fetchBikes(),
+          fetchStations(),
+          fetchZones(),
+          fetchCities()
+        ]);
+        setBikes(fetchedBikes);
+        setStations(fetchedStations);
+        setZones(fetchedZones);
+        setCities(fetchedCities);
+      } catch (error) {
+        console.error('Kunde inte hämta data:', error);
+      }
+    };
+    loadData();
 
-  const getBikes = async () => {
-    const data = await fetchBikes();
-    setBikes(data);
-  };
+    socket.on("admin-trip-update", (trip) => {
+      const { bike } = trip;
+      setBikes(prevBikes => 
+        prevBikes.map(b => b.bike_id === bike.bike_id ? bike : b)
+      );
+    });
 
-  const getStationsAndZones = async () => {
-    try {
-      const [stationData, zoneData] = await Promise.all([
-        fetchStations(),
-        fetchZones(),
-      ]);
-      // console.log("Fetched zones:", zoneData);
-      // console.log("Fetched sations:", stationData);
-      setStations(stationData);
-      setZones(zoneData);
-    } catch (error) {
-      console.error("Kunde inte hämta laddstationer eller parkeringszoner", error);
-    }
-  };
+    return () => {
+      socket.off("admin-trip-update");
+    };
+  }, []);
 
   const handleStationChange = async (stationId) => {
     setSelectedStation(stationId);
@@ -54,7 +53,8 @@ const MapPage = () => {
       const bikesAtStation = await fetchBikesAtStation(stationId);
       setBikes(bikesAtStation);
     } else {
-      await getBikes(); // Återställ till alla cyklar
+      const data = await fetchBikes();
+      setBikes(data);
     }
   };
 
@@ -64,38 +64,29 @@ const MapPage = () => {
       const bikesAtZone = await fetchBikesAtZone(zoneId);
       setBikes(bikesAtZone);
     } else {
-      await getBikes(); // Återställ till alla cyklar
+      const data = await fetchBikes();
+      setBikes(data);
     }
   };
 
-  useEffect(() => {
-    getCities();
-    getBikes();
-    getStationsAndZones();
+  const handleStatusChange = async (bike) => {
+    try {
+      const newStatus = bike.status === 'maintenance' 
+        ? 'available' 
+        : 'maintenance';
 
-    socket.on("admin-trip-update", (trip) => {
-      const { bike } = trip
-
-      setTrips((prevTrips) => {
-        const updatedTrips = prevTrips.filter((t) => t.trip_id !== trip.trip_id);
-        return [...updatedTrips, trip];
-      });
-
-      setBikes((prevBikes) => {
-        const updatedBikes = prevBikes.filter((b) => b.bike_id !== bike.bike_id);
-        return [...updatedBikes, bike];
-      });
-    });
-    
-    return () => {
-      socket.off("admin-trip-update");
-      socket.off("disconnect");
-    };
-  }, []);
+      const updatedBike = await updateBike(bike.bike_id, { status: newStatus });
+      
+      setBikes(bikes.map(b => 
+        b.bike_id === bike.bike_id ? updatedBike : b
+      ));
+    } catch (error) {
+      console.error('Kunde inte uppdatera cykelstatus:', error);
+    }
+  };
 
   return (
-    <div className="bikes-page">
-      {/* Karta */}
+    <div className="bikes-admin">
       <Map 
         center={center} 
         cities={cities}
@@ -104,165 +95,67 @@ const MapPage = () => {
         bikes={bikes}
       />
 
-      {/* Filter */}
-      <div className="filters">
-        <h2>Filtrera cyklar</h2>
-        <div className="filter-group">
-          <label htmlFor="stations">Välj Laddstation:</label>
-          <select
-            id="stations"
-            value={selectedStation || ""}
-            onChange={(e) => handleStationChange(e.target.value)}
+      <div className="filters flex gap-4 mb-4">
+        <select 
+          value={selectedStation} 
+          onChange={(e) => handleStationChange(e.target.value)}
+          className="btn"
           >
-            <option value="">Alla laddstationer</option>
-            {stations.map((station) => (
-              <option key={station._id} value={station._id}>
-                {station._id}
-              </option>
-            ))}
-          </select>
-        </div>
+          <option value="">Alla laddstationer</option>
+          {stations.map(station => (
+            <option key={station._id} value={station._id}>
+              {station._id}
+            </option>
+          ))}
+        </select>
 
-        <div className="filter-group">
-          <label htmlFor="zones">Välj Parkeringszon:</label>
-          <select
-            id="zones"
-            value={selectedZone || ""}
-            onChange={(e) => handleZoneChange(e.target.value)}
-          >
-            <option value="">Alla parkeringszoner</option>
-            {zones.map((zone) => (
-              <option key={zone._id} value={zone.parking_zone_id}>
-                {zone.parking_zone_id}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select 
+          value={selectedZone} 
+          onChange={(e) => handleZoneChange(e.target.value)}
+          className="btn"
+        >
+          <option value="">Alla parkeringszoner</option>
+          {zones.map(zone => (
+            <option key={zone.parking_zone_id} value={zone.parking_zone_id}>
+              {zone.parking_zone_id}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* Lista över cyklar */}
-      <div className="bike-list">
-        <h2>Lista över Cyklar</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Status</th>
-              <th>Position</th>
-              <th>Typ</th>
-              <th>Meddelande</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Cykel-ID</th>
+            <th>Status</th>
+            <th>Station</th>
+            <th>Zon</th>
+            <th>Typ</th>
+            <th>Åtgärder</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bikes.map(bike => (
+            <tr key={bike.bike_id}>
+              <td>{bike.bike_id}</td>
+              <td>{bike.status}</td>
+              <td>{bike.station_id || 'Ingen'}</td>
+              <td>{bike.parking_zone_id || 'Ingen'}</td>
+              <td>{bike.type || 'Okänd'}</td>
+              <td>
+                <button 
+                  onClick={() => handleStatusChange(bike)}
+                  className={`btn secondary-btn ${bike.status === 'maintenance' ? 'active' : ''}`}
+                >
+                  {bike.status === 'maintenance' ? 'Aktivera' : 'Underhåll'}
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {bikes.map((bike) => (
-              <tr key={bike.bike_id}>
-                <td>{bike.bike_id}</td>
-                <td>{bike.status}</td>
-                <td>
-                  {bike.location || bike.location.coordinates
-                    ? `${bike.location.coordinates[1].toFixed(4)}, ${bike.location.coordinates[0].toFixed(4)}`
-                    : "Okänd position"}
-                </td>
-                <td>{bike.type || "Okänd"}</td>
-                <td>{bike.message}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default MapPage;
-
-
-
-
-
-// import React, { useState, useEffect } from "react";
-// import Map from "../../components/Common/Map";
-// import { fetchCities } from "../../utils/ApiCall";
-// import { fetchBikes } from "../../utils/BikeCall";
-// import io from "socket.io-client";
-
-// const socket = io("http://localhost:5001");
-
-// const MapPage = () => {
-//   const [center, setCenter] = useState({ lat: 59.329323, lng: 18.068581 });
-//   const [cities, setCities] = useState([]);
-//   const [bikes, setBikes] = useState([]);
-//   const numTrips = 16;
-//   const roomIds = Array.from({ length: numTrips }, (_, i) => `trip${i}`);
-
-//   const getCities = async () => {
-//     const data = await fetchCities();
-//     setCities(data);
-//   };
-
-//   const getBikes = async () => {
-//     const data = await fetchBikes();
-//     setBikes(data);
-//   };
-
-//   useEffect(() => {
-//     getCities();
-//     getBikes();
-
-//     roomIds.forEach((roomId) => {
-//       socket.emit("join-trip-room", roomId);
-//     });
-
-//     socket.on("position-updated", (data) => {
-//       const bike = data;
-
-//       setBikes((prevBikes) => {
-//         const updatedBikes = prevBikes.filter((b) => b.bike_id !== bike.bike_id);
-//         return [...updatedBikes, bike];
-//       });
-//     });
-
-//     return () => {
-//       socket.off("position-updated");
-//       socket.off("disconnect");
-//     };
-//   }, []);
-
-//   return (
-//     <div className="bikes-page">
-//       {/* Karta */}
-//       <Map center={center} cities={cities} bikes={bikes} />
-
-//       {/* Lista över cyklar */}
-//       <div className="bike-list">
-//         <h2>Lista över Cyklar</h2>
-//         <table>
-//           <thead>
-//             <tr>
-//               <th>ID</th>
-//               <th>Status</th>
-//               <th>Position</th>
-//               <th>Typ</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {bikes.map((bike) => (
-//               <tr key={bike.bike_id}>
-//                 <td>{bike.bike_id}</td>
-//                 <td>{bike.status}</td>
-//                 <td>
-//                   {bike.latitude && bike.longitude
-//                     ? `${bike.latitude.toFixed(4)}, ${bike.longitude.toFixed(4)}`
-//                     : "Okänd position"}
-//                 </td>
-//                 <td>{bike.type || "Okänd"}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MapPage;
+export default Bikes;

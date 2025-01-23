@@ -16,47 +16,6 @@ const AccountDetails = () => {
     preferred_payment_method: theUser.preferred_payment_method,
     autogiro_details: theUser.autogiro_details
   });
-  // const [userId, setUserId] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-
-  // Hämta användardata när komponenten mountas
-  // useEffect(() => {
-  //   // const userIdFromStorage = localStorage.getItem('userId');
-  //   // const userData = localStorage.getItem('user')
-  //   // const user = JSON.parse(userData)
-  //   // const userIdFromStorage = user.id // Hämta userId från localStorage
-  //   if (userIdFromStorage) {
-  //     setUserId(userIdFromStorage); // Sätt användar-ID i state
-  //     fetchUserDetails(userIdFromStorage); // Hämta användardetaljer
-  //   } else {
-  //     console.error('Inget användar-ID hittades. Kontrollera att användaren är inloggad.');
-  //     // Eventuellt omdirigera användaren till inloggningssidan
-  //     window.location.href = '/login';
-  //   }
-  // }, []);
-  
-
-  // const fetchUserDetails = async (id) => {
-  //   try {
-  //     setLoading(true); // Börjar ladda
-  //     const userData = await fetchUser(id); // Använd fetchUser för att hämta data
-  //     setUser({
-  //       name: userData.name,
-  //       email: userData.email,
-  //       account_balance: userData.account_balance,
-  //       user_id: userData.user_id,
-  //       createdAt: new Date(userData.createdAt).toLocaleString(),
-  //       updatedAt: new Date(userData.updatedAt).toLocaleString(),
-  //       preferred_payment_method: userData.preferred_payment_method || 'prepaid', // Sätt favoritbetalmedel
-  //       autogiro_details: userData.autogiro_details || '' // Sätt autogirodetaljer
-  //     });
-  //   } catch (error) {
-  //     console.error('Kunde inte hämta användardetaljer:', error);
-  //   } finally {
-  //     setLoading(false); // Sluta ladda
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
