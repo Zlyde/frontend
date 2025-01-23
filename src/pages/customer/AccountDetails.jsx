@@ -31,6 +31,16 @@ const AccountDetails = () => {
     }
   };
 
+  const fetchUserr = async () => {
+    if (!userIdFromStorage) return
+    const sameUser = await fetchUser(userIdFromStorage)
+    setUser(sameUser);
+  }
+
+  useEffect(() => {
+    fetchUserr()
+  },[])
+
   // if (loading) return <p>Laddar...</p>; // Visa laddningsmeddelande tills data är hämtad
 
   return (

@@ -103,8 +103,8 @@ const Bikes = () => {
           >
           <option value="">Alla laddstationer</option>
           {stations.map(station => (
-            <option key={station._id} value={station._id}>
-              {station._id}
+            <option key={station._id} value={station.charging_station_id}>
+              {station.charging_station_id}
             </option>
           ))}
         </select>
@@ -139,7 +139,7 @@ const Bikes = () => {
             <tr key={bike.bike_id}>
               <td>{bike.bike_id}</td>
               <td>{bike.status}</td>
-              <td>{bike.station_id || 'Ingen'}</td>
+              <td>{bike.charging_station_id || 'Ingen'}</td>
               <td>{bike.parking_zone_id || 'Ingen'}</td>
               <td>{bike.type || 'Okänd'}</td>
               <td>

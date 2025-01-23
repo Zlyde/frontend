@@ -33,7 +33,7 @@ export const updateSettings = async (updatedSettings) => {
 export const resetSettings = async () => {
   try {
     const response = await fetch(`${API_URL}/reset`, {
-      method: 'POST', // POST till /api/setting/reset
+      method: 'PUT', // POST till /api/setting/reset
     });
     if (!response.ok) throw new Error('Kunde inte återställa inställningarna');
     return await response.json();
