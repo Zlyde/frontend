@@ -6,10 +6,13 @@ const RentalHistory = () => {
   const [selectedRental, setSelectedRental] = useState(null);
   const [loading, setLoading] = useState(true); // För att visa laddningsstatus
   const [error, setError] = useState(null); // För att hantera fel
+  const userData = localStorage.getItem('user')
+  const user = JSON.parse(userData)
+  const userId = user.user_id
 
   useEffect(() => {
     // Hämta användarens ID från localStorage
-    const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
 
     loadRentalHistory(userId);
   }, []);

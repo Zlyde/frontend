@@ -15,9 +15,13 @@ const AccountDetails = () => {
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
   // Hämta användardata när komponenten mountas
   useEffect(() => {
-    const userIdFromStorage = localStorage.getItem('userId'); // Hämta userId från localStorage
+    // const userIdFromStorage = localStorage.getItem('userId');
+    const userData = localStorage.getItem('user')
+    const user = JSON.parse(userData)
+    const userIdFromStorage = user.id // Hämta userId från localStorage
     if (userIdFromStorage) {
       setUserId(userIdFromStorage); // Sätt användar-ID i state
       fetchUserDetails(userIdFromStorage); // Hämta användardetaljer

@@ -16,6 +16,10 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    localStorage.removeItem('name')
+    localStorage.removeItem('role')
+    localStorage.removeItem('userId')
   };
 
   return (
