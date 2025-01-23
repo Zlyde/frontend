@@ -2,17 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import { fetchInvoices, markInvoiceAsPaid } from '../../utils/InvoiceCall';
 
-const PaymentHistory = ({ userId }) => {
+const PaymentHistory = () => {
   const [invoices, setInvoices] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const userData = localStorage.getItem('user')
+  const user = JSON.parse(userData)
+  const userId = user.user_id
 
   // Hämta fakturor när komponenten laddas
   useEffect(() => {
     // const userId = localStorage.getItem('userId');
-    const userData = localStorage.getItem('user')
-    const user = JSON.parse(userData)
-    const userId = user.user_id
+    // const userData = localStorage.getItem('user')
+    // const user = JSON.parse(userData)
+    // const userId = user.user_id
     const loadInvoices = async () => {
       setLoading(true);
       try {
