@@ -65,7 +65,7 @@ const Bikes = () => {
     setSelectedZone(zoneId);
     if (zoneId) {
       const bikesAtZone = await fetchBikesAtZone(zoneId);
-      setBikes(Array.isArray(bikesAtZone) ? bikesAtZone : []);
+      setBikes(bikesAtZone.bikes);
     } else {
       const data = await fetchBikes();
       setBikes(Array.isArray(data) ? data : []);
