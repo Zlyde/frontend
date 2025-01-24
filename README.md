@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Frontend - VTEAM ZOOMIES
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Detta är webb-applikationen för vårt elsparkcykel-system. Applikationen är byggd med React.js tillsammans med vite, där frontend kommunicerar Kommunikation med backend via vårat REST-API.
 
-## Available Scripts
+Systemet är en del av ett större system som hanteras via ett centralt repo, kallat vteam. I vteam repot finns instruktioner för att sätta upp hela systemet, inklusive backend, databaser och mobil-appen.
 
-In the project directory, you can run:
+Man kan logga in som kund och administratör och genomföra CRUD-operationer för att skapa, läsa, uppdatera och radera data relaterat till elsparkcykelsystemet.
 
-### `npm start`
+## Viktiga punkter
+- Repot fokuserar på frontend-delen och hanteras med Docker som en del av systemet.
+- För att systemet ska fungera korrekt behöver repon klonas i en specifik ordning.
+- Testning sker med npm-skript:
+```bash
+npm test
+eller
+npm test:coverage
+```
+## Installation och körning
+Då detta är en del av ett större system så behöver vi göra enligt följande:
+- Klona i rätt ordning för att säkerställa att alla tjänster startas korrekt med:
+```bash
+docker-compose up --build
+```
+- Lokal utveckling:
+Du kan även köra projektet lokalt för utveckling:
+```bash
+git clone https://github.com/<ditt-username>/<frontend-repo>.git
+cd <frontend-repo>
+npm install
+npm start
+```
+Detta kommer starta applikationen på http://localhost:3000
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Förutsättningar
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Innan du startar projektet behöver du följande:
+- Node.js (version 16 eller högre)
+- npm eller yarn för att installera beroenden
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Översikt av de viktigaste filerna och mapparna:
+```bash
+src/
+├── components/       # Återanvändbara komponenter
+├── pages/            # Sidor
+├── utils/            # Hjälpfunktioner (API-anrop)
+├── styles/           # SCSS för projektet
+├── App.js            # Huvudkomponent
+├── index.js          # Projektets ingångspunkt
+├── .env              # Miljövariabler
+```

@@ -14,6 +14,7 @@ describe('BikeCall Utilities', () => {
     it('should fetch bikes successfully', async () => {
       const mockBikes = [{ id: 1 }, { id: 2 }]
       global.fetch.mockResolvedValue({
+        ok: true,
         json: () => Promise.resolve(mockBikes)
       })
 
@@ -25,8 +26,7 @@ describe('BikeCall Utilities', () => {
     it('should handle fetch error', async () => {
       global.fetch.mockRejectedValue(new Error('Fetch error'))
 
-      const result = await fetchBikes()
-      expect(result).toBeUndefined()
+      await expect(fetchBikes()).rejects.toThrow('Fetch error')
     })
   })
 
@@ -38,6 +38,7 @@ describe('BikeCall Utilities', () => {
         { status: 'available' }
       ]
       vi.spyOn(global, 'fetch').mockResolvedValue({
+        ok: true,
         json: () => Promise.resolve(mockBikes)
       })
 

@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 const socket = io("http://localhost:5001");
 
 const Bikes = () => {
-  const [center] = useState({ lat: 59.329323, lng: 18.068581 });
+  const [center] = useState({ lat: 56.18245003903675, lng: 15.59082446366235 });
   const [bikes, setBikes] = useState([]);
   const [stations, setStations] = useState([]);
   const [zones, setZones] = useState([]);

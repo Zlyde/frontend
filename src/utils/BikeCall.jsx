@@ -6,11 +6,14 @@ export const fetchBikes = async () => {
 
   try {
     const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Fetch error')
+    }
     const bikes = await response.json()
     return bikes
   } catch (error) {
     console.log(error.message)
-    return
+    throw error
   }
 }
 
@@ -27,7 +30,7 @@ export const fetchBikeStats = async () => {
     return { totalBikes, activeRentals, chargingStations };
   } catch (error) {
     console.log("Fel vid hämtning av statistik: ", error.message);
-    throw error;
+    throw Error('Fetch error');
   }
 };
 

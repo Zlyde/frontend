@@ -35,13 +35,6 @@ export const userLogin = async (email, password) => {
       throw new Error(data.error);
     }
 
-    // // Spara användardata i localStorage
-    // localStorage.setItem('userId', data.user.userId); // Spara userId
-    // localStorage.setItem('name', data.user.name);
-    // localStorage.setItem('email', data.user.email);
-    // localStorage.setItem('role', data.user.role);
-    // localStorage.setItem('token', data.token); // Spara token
-
     return data; // Returnera användardetaljer och token
   } catch (error) {
     console.error('Inloggning misslyckades:', error);
