@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5001/api';
+import API_VERSION from "../config/api_version"
+const API_URL = `http://localhost:5001${API_VERSION}`;
 
 // Hämta alla laddstationer
 export const fetchStations = async () => {

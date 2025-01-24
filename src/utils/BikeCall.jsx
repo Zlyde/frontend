@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5001/api/bike';
+import API_VERSION from "../config/api_version"
+const API_URL = `http://localhost:5001${API_VERSION}/bike`;
 
 // Hämta alla cyklar
 export const fetchBikes = async () => {

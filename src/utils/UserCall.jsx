@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5001/api/user';
+import API_VERSION from "../config/api_version"
+const API_URL = `http://localhost:5001${API_VERSION}/user`;
 
 // Hämta alla användare
 export const fetchUsers = async () => {

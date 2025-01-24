@@ -1,6 +1,6 @@
 // utils/InvoiceCall.jsx
-
-const API_URL = 'http://localhost:5001/api/invoice';
+import API_VERSION from "../config/api_version"
+const API_URL = `http://localhost:5001${API_VERSION}/invoice`;
 
 /**
  * Hämta alla fakturor för en specifik användare
