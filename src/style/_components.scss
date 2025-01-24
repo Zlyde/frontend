@@ -2,14 +2,16 @@
 @use "sass:color";
 
 .app-header {
-  background-color: v.$primary-color;
+  background-color: #a59e90;
   color: #fff;
   padding: 1rem 2rem;
+  
 
   .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 8em;
 
     h1 {
       font-size: 1.5rem;
@@ -24,6 +26,10 @@
         color: v.$accent-color;
       }
     }
+  }
+  .header-logo {
+    height: 100%; /* Makes the logo height match the header */
+    width: auto; /* Maintains the aspect ratio */
   }
 }
 

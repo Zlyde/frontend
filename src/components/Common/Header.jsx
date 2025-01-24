@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
+import ZoomiesLogo from "../../assets/Zoomies.png";
 
 const Header = () => {
   const { logout } = useUserContext();
@@ -43,6 +44,7 @@ const Header = () => {
   return (
     <header className="app-header">
       <div className="header-container">
+        <img src={ZoomiesLogo} alt="Zoomies Logo" className="header-logo" />
         <h1>ZOOMIES</h1>
         <nav>
           {/* <a href="/">Hem</a>
