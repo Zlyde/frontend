@@ -38,9 +38,10 @@ const Bikes = () => {
 
     socket.on("admin-trip-update", (trip) => {
       const { bike } = trip;
-      setBikes(prevBikes => 
-        prevBikes.map(b => b.bike_id === bike.bike_id ? bike : b)
-      );
+      setBikes((prevBikes) => {
+        const updatedBikes = prevBikes.filter((b) => b.bike_id !== bike.bike_id);
+        return [...updatedBikes, bike];
+      });
     });
 
     return () => {

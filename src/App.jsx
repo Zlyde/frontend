@@ -21,6 +21,7 @@ import ServiceDashboard from "./pages/service/ServiceDashboard";
 import Users from "./pages/admin/Users";
 import Pricing from "./pages/admin/Pricing";
 import Bikes from "./pages/admin/Bikes";
+// import MapPage from "./pages/admin/Bikes";
 import AccountDetails from "./pages/customer/AccountDetails";
 import PaymentHistory from "./pages/customer/PaymentHistory";
 import RentalHistory from "./pages/customer/RentalHistory";

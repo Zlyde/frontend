@@ -52,7 +52,7 @@ const LoginPage = () => {
   };
 
   const handleGitHubLogin = () => {
-    window.location.href = 'http://localhost:5001/api/auth/githubb'
+    window.location.href = 'http://localhost:5001/api/v1/auth/githubb'
   }
 
   return (
