@@ -52,8 +52,8 @@ const Bikes = () => {
     setSelectedStation(stationId);
     if (stationId) {
       const bikesAtStation = await fetchBikesAtStation(stationId);
-      console.log("available bikes", bikesAtStation)
-      setBikes(bikesAtStation);
+      console.log("available bikes", bikesAtStation.bikes)
+      setBikes(bikesAtStation.bikes);
       console.log(bikes);
     } else {
       const data = await fetchBikes();
@@ -131,7 +131,7 @@ const Bikes = () => {
           <tr>
             <th>Cykel-ID</th>
             <th>Status</th>
-            <th>Station</th>
+            <th>Battery</th>
             <th>Zon</th>
             <th>Typ</th>
             <th>Åtgärder</th>
@@ -142,7 +142,7 @@ const Bikes = () => {
             <tr key={bike.bike_id}>
               <td>{bike.bike_id}</td>
               <td>{bike.status}</td>
-              <td>{bike.charging_station_id || 'Ingen'}</td>
+              <td>{bike.battery_level}</td>
               <td>{bike.parking_zone_id || 'Ingen'}</td>
               <td>{bike.type || 'Okänd'}</td>
               <td>
