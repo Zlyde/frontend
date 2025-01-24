@@ -21,6 +21,7 @@
     "watch": "sass src/style/style.scss:src/index.css --no-source-map --watch",
     "style": "sass src/style/style.scss:src/index.css --no-source-map",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "lint": "eslint .",
     "format": "prettier --write ."
@@ -46,9 +47,10 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
+    "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.5.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.8",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",

@@ -5,7 +5,7 @@ import L from 'leaflet'
 
 const Station = ({ station }) => {
   if (!station) return
-  console.log(station)
+  // console.log(station)
   const getCenter = (coordinates) => {
     const latLngs = coordinates[0]; // Use the first polygon (excluding holes)
     let latSum = 0;

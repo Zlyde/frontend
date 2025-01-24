@@ -25,6 +25,7 @@ const Bikes = () => {
           fetchZones(),
           fetchCities()
         ]);
+        setBikes(Array.isArray(fetchedBikes) ? fetchedBikes : []);
         setBikes(fetchedBikes);
         setStations(fetchedStations);
         setZones(fetchedZones);
@@ -51,10 +52,12 @@ const Bikes = () => {
     setSelectedStation(stationId);
     if (stationId) {
       const bikesAtStation = await fetchBikesAtStation(stationId);
+      console.log("available bikes", bikesAtStation)
       setBikes(bikesAtStation);
+      console.log(bikes);
     } else {
       const data = await fetchBikes();
-      setBikes(data);
+      setBikes(Array.isArray(data) ? data : []);
     }
   };
 
@@ -62,10 +65,10 @@ const Bikes = () => {
     setSelectedZone(zoneId);
     if (zoneId) {
       const bikesAtZone = await fetchBikesAtZone(zoneId);
-      setBikes(bikesAtZone);
+      setBikes(Array.isArray(bikesAtZone) ? bikesAtZone : []);
     } else {
       const data = await fetchBikes();
-      setBikes(data);
+      setBikes(Array.isArray(data) ? data : []);
     }
   };
 
@@ -135,7 +138,7 @@ const Bikes = () => {
           </tr>
         </thead>
         <tbody>
-          {bikes.map(bike => (
+          {bikes.map((bike) => (
             <tr key={bike.bike_id}>
               <td>{bike.bike_id}</td>
               <td>{bike.status}</td>
