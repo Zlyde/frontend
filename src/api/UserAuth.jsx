@@ -1,5 +1,5 @@
 export const userRegister =  async (name, email, password) => {
-  const url = 'http://localhost:5001/api/auth/register'
+  const url = 'http://localhost:5001/api/v1/auth/register'
 
   const requestOptions = {
     method: 'POST',
@@ -14,7 +14,7 @@ export const userRegister =  async (name, email, password) => {
 }
 
 export const userLogin = async (email, password) => {
-  const url = 'http://localhost:5001/api/auth/login';
+  const url = 'http://localhost:5001/api/v1/auth/login';
 
   const requestOptions = {
     method: 'POST',

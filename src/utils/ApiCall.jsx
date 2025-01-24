@@ -2,7 +2,7 @@ import API_VERSION from "../config/api_version"
 
 export const fetchCities = async () => {
   try {
-    const response = await fetch(`http://localhost:5001${API_VERSION}/auth/register`)
+    const response = await fetch(`http://localhost:5001${API_VERSION}/city`)
     if (!response.ok) {
       throw new Error('could not fetch cities')
     }
