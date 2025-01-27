@@ -3,7 +3,7 @@ import { fetchRentalHistory, fetchRentalDetails } from './TripCall'
 
 global.fetch = vi.fn()
 
-const API_URL = 'http://localhost:5001/api/trip'
+const API_URL = 'http://localhost:5001/api/v1/trip'
 
 describe('TripCall Utilities', () => {
   afterEach(() => {

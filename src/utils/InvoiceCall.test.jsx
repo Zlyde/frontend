@@ -7,7 +7,7 @@ import {
 
 global.fetch = vi.fn()
 
-const API_URL = 'http://localhost:5001/api/invoice'
+const API_URL = 'http://localhost:5001/api/v1/invoice'
 
 describe('InvoiceCall Utilities', () => {
   afterEach(() => {

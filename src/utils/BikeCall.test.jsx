@@ -3,7 +3,7 @@ import { fetchBikes, fetchBikeStats, updateBike } from './BikeCall'
 
 global.fetch = vi.fn()
 
-const API_URL = 'http://localhost:5001/api/bike'
+const API_URL = 'http://localhost:5001/api/v1/bike'
 
 describe('BikeCall Utilities', () => {
   afterEach(() => {

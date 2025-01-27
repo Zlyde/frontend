@@ -3,7 +3,7 @@ import { fetchUsers, fetchUser, deleteUser, updateUser } from './UserCall'
 
 global.fetch = vi.fn()
 
-const API_URL = 'http://localhost:5001/api/user'
+const API_URL = 'http://localhost:5001/api/v1/user'
 
 describe('UserCall Utilities', () => {
   afterEach(() => {

@@ -3,7 +3,7 @@ import { fetchSettings, updateSettings, resetSettings } from './SettingCall'
 
 global.fetch = vi.fn()
 
-const API_URL = 'http://localhost:5001/api/setting'
+const API_URL = 'http://localhost:5001/api/v1/setting'
 
 describe('SettingCall Utilities', () => {
   afterEach(() => {

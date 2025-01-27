@@ -23,7 +23,7 @@ describe('fetchCities', () => {
 
     const result = await fetchCities()
     expect(result).toEqual(mockCities)
-    expect(global.fetch).toHaveBeenCalledWith('http://localhost:5001/api/city')
+    expect(global.fetch).toHaveBeenCalledWith('http://localhost:5001/api/v1/city')
   })
 
   it('should return empty array on fetch error', async () => {
