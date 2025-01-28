@@ -35,30 +35,6 @@ const BikeList = () => {
 
   }, []);
 
-//   const handleStationChange = async (stationId) => {
-//     setSelectedStation(stationId);
-//     if (stationId) {
-//       const bikesAtStation = await fetchBikesAtStation(stationId);
-//       console.log("available bikes", bikesAtStation.bikes)
-//       setBikes(bikesAtStation.bikes);
-//       console.log(bikes);
-//     } else {
-//       const data = await fetchBikes();
-//       setBikes(Array.isArray(data) ? data : []);
-//     }
-//   };
-
-//   const handleZoneChange = async (zoneId) => {
-//     setSelectedZone(zoneId);
-//     if (zoneId) {
-//       const bikesAtZone = await fetchBikesAtZone(zoneId);
-//       setBikes(bikesAtZone.bikes);
-//     } else {
-//       const data = await fetchBikes();
-//       setBikes(Array.isArray(data) ? data : []);
-//     }
-//   };
-
 const handleStationChange = async (stationId) => {
     setSelectedStation(stationId);
     try {
@@ -78,7 +54,7 @@ const handleStationChange = async (stationId) => {
       }
     } catch (error) {
       console.error('Fel vid hämtning av cyklar:', error);
-      setErrorMessage('Ett fel uppstod när cyklar skulle hämtas.');
+      setErrorMessage('Finns inga cyklar vid den valda laddstationen.');
       setBikes([]);
     }
   };
@@ -102,7 +78,7 @@ const handleStationChange = async (stationId) => {
       }
     } catch (error) {
       console.error('Fel vid hämtning av cyklar:', error);
-      setErrorMessage('Ett fel uppstod när cyklar skulle hämtas.');
+      setErrorMessage('Finns inga cyklar vid den valda parkeringszonen.');
       setBikes([]);
     }
   };
@@ -157,7 +133,7 @@ const handleStationChange = async (stationId) => {
       </div>
 
       {errorMessage && (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+      <div className="error-message" role="alert">
         <p>{errorMessage}</p>
       </div>
     )}
@@ -191,7 +167,7 @@ const handleStationChange = async (stationId) => {
         </tbody>
       </table>
       ) : !errorMessage && (
-        <div className="text-gray-500 text-center py-4">
+        <div className="error-message">
           Inga cyklar att visa
         </div>
       )}
