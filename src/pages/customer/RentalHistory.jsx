@@ -59,7 +59,7 @@ const RentalHistory = () => {
                 <th>Datum</th>
                 <th>Starttid</th>
                 <th>Sluttid</th>
-                <th>Kostnad</th>
+                <th>Varaktighet</th>
                 <th>Detaljer</th>
               </tr>
             </thead>
@@ -69,7 +69,7 @@ const RentalHistory = () => {
                   <td>{new Date(rental.start_time).toLocaleDateString()}</td>
                   <td>{new Date(rental.start_time).toLocaleTimeString()}</td>
                   <td>{rental.end_time ? new Date(rental.end_time).toLocaleTimeString() : 'Pågående'}</td>
-                  <td>{rental.total_cost} SEK</td>
+                  <td>{rental.duration} minuter</td>
                   <td>
                     <button onClick={() => handleRentalClick(rental)} className="btn primary-btn">Visa detaljer</button>
                   </td>
@@ -84,7 +84,7 @@ const RentalHistory = () => {
               <h2>Detaljer för uthyrning</h2>
               <p><strong>Starttid:</strong> {new Date(selectedRental.start_time).toLocaleString()}</p>
               <p><strong>Sluttid:</strong> {selectedRental.end_time ? new Date(selectedRental.end_time).toLocaleString() : 'Pågående'}</p>
-              <p><strong>Kostnad:</strong> {selectedRental.total_cost} SEK</p>
+              <p><strong>Varaktighet:</strong> {selectedRental.total_cost} SEK</p>
               <p><strong>Startpunkt:</strong> {selectedRental.start_location.coordinates.join(', ')}</p>
               <p><strong>Slutpunkt:</strong> {selectedRental.end_location.coordinates.join(', ')}</p>
               {/* Här kan du också lägga till en karta eller mer detaljer om uthyrningen */}

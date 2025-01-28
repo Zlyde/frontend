@@ -49,45 +49,45 @@ const Bikes = () => {
     };
   }, []);
 
-  const handleStationChange = async (stationId) => {
-    setSelectedStation(stationId);
-    if (stationId) {
-      const bikesAtStation = await fetchBikesAtStation(stationId);
-      console.log("available bikes", bikesAtStation.bikes)
-      setBikes(bikesAtStation.bikes);
-      console.log(bikes);
-    } else {
-      const data = await fetchBikes();
-      setBikes(Array.isArray(data) ? data : []);
-    }
-  };
+  // const handleStationChange = async (stationId) => {
+  //   setSelectedStation(stationId);
+  //   if (stationId) {
+  //     const bikesAtStation = await fetchBikesAtStation(stationId);
+  //     console.log("available bikes", bikesAtStation.bikes)
+  //     setBikes(bikesAtStation.bikes);
+  //     console.log(bikes);
+  //   } else {
+  //     const data = await fetchBikes();
+  //     setBikes(Array.isArray(data) ? data : []);
+  //   }
+  // };
 
-  const handleZoneChange = async (zoneId) => {
-    setSelectedZone(zoneId);
-    if (zoneId) {
-      const bikesAtZone = await fetchBikesAtZone(zoneId);
-      setBikes(bikesAtZone.bikes);
-    } else {
-      const data = await fetchBikes();
-      setBikes(Array.isArray(data) ? data : []);
-    }
-  };
+  // const handleZoneChange = async (zoneId) => {
+  //   setSelectedZone(zoneId);
+  //   if (zoneId) {
+  //     const bikesAtZone = await fetchBikesAtZone(zoneId);
+  //     setBikes(bikesAtZone.bikes);
+  //   } else {
+  //     const data = await fetchBikes();
+  //     setBikes(Array.isArray(data) ? data : []);
+  //   }
+  // };
 
-  const handleStatusChange = async (bike) => {
-    try {
-      const newStatus = bike.status === 'maintenance' 
-        ? 'available' 
-        : 'maintenance';
+  // const handleStatusChange = async (bike) => {
+  //   try {
+  //     const newStatus = bike.status === 'maintenance' 
+  //       ? 'available' 
+  //       : 'maintenance';
 
-      const updatedBike = await updateBike(bike.bike_id, { status: newStatus });
-      
-      setBikes(bikes.map(b => 
-        b.bike_id === bike.bike_id ? updatedBike : b
-      ));
-    } catch (error) {
-      console.error('Kunde inte uppdatera cykelstatus:', error);
-    }
-  };
+  //     const updatedBike = await updateBike(bike.bike_id, { status: newStatus });
+
+  //     setBikes(bikes.map(b => 
+  //       b.bike_id === bike.bike_id ? updatedBike : b
+  //     ));
+  //   } catch (error) {
+  //     console.error('Kunde inte uppdatera cykelstatus:', error);
+  //   }
+  // };
 
   return (
     <div className="bikes-admin">
@@ -99,7 +99,7 @@ const Bikes = () => {
         bikes={bikes}
       />
 
-      <div className="filters flex gap-4 mb-4">
+      {/* <div className="filters flex gap-4 mb-4">
         <select 
           value={selectedStation} 
           onChange={(e) => handleStationChange(e.target.value)}
@@ -157,7 +157,7 @@ const Bikes = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
