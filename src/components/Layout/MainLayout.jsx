@@ -9,7 +9,9 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="main-layout">
+        <Outlet />
+      </div>
       <ToastContainer />
       <Footer />
     </>
